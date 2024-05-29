@@ -1,7 +1,8 @@
 package com.riwi.Simulacro_Spring_Boot.domain.entities;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -9,27 +10,28 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "lessons")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class submissions {
+public class lessons {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String content;
-    private LocalDateTime date;
-    private Double grade;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
-    private user user;
+    private String title;
+    private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "assignment_id",referencedColumnName = "id")
-    private assignments assignments;
+    @JoinColumn(name = "courses_id", referencedColumnName = "id")
+    private courses lessons;
+
+    @OneToMany(mappedBy = "assigments",cascade = CascadeType.REFRESH)
+    private List<assignments> assigments;
 }
