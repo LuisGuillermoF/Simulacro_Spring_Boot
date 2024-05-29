@@ -19,5 +19,7 @@ public class enrollments {
     private Long id;
     private LocalDateTime date;
 
-    private Long idUser;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="coursesId", referencedColumnName ="id")
+    private Long coursesId;
 }

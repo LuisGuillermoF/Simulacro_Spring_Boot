@@ -25,6 +25,11 @@ public class user {
     private String fullName;
     private role role;
 
-    
-    
+    @OneToMany(
+        mappedBy="coursesId",
+        cascade = CascadeType.ALL,
+        orphanRemoval = false, 
+        fetch = FetchType.EAGER
+    )
+    private enrollments enrollment;
 }
