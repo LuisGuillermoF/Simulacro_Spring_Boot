@@ -52,4 +52,10 @@ public class user {
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<messages> messages;
+
+    @OneToMany(mappedBy = "senderId",cascade = CascadeType.ALL)
+    private List<messages> messagesSender;
+
+    @OneToMany(mappedBy = "receiverId",cascade = CascadeType.ALL)
+    private List<messages> messagesReceiver;
 }

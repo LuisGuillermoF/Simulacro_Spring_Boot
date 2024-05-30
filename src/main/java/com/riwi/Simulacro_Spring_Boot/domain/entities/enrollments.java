@@ -12,9 +12,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity (name = "enrollments")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
