@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,23 +22,23 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class courses {
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameCourse;
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private List<user> user;
+    private User user;
 
     @OneToMany(mappedBy = "courses_id", fetch = FetchType.LAZY,cascade =  CascadeType.REFRESH)
-    private List<enrollments> enrollments;
+    private List<Enrollment> enrollments;
 
     @OneToMany(mappedBy = "lessons",fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
-    private List<lessons> lessons;
+    private List<Lesson> lessons;
 
     @OneToMany(mappedBy = "courses",fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
-    private List<messages> messages;
+    private List<Message> messages;
 }

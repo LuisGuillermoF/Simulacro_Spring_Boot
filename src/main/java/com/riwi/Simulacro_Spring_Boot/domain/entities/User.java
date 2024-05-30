@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class user {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,21 +41,19 @@ public class user {
     private role role;
 
     @OneToMany(mappedBy = "user",
-    cascade = CascadeType.ALL)
-    private List<courses> courses;
+    cascade = CascadeType.ALL,orphanRemoval = false)
+    private List<Course> courses;
 
     @OneToMany(mappedBy = "courseEnrollsments",cascade = CascadeType.ALL)
-    private List<enrollments> enrollments;
+    private List<Enrollment> enrollments;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<submissions> submissions;
+    private List<Submission> submissions;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<messages> messages;
 
-    @OneToMany(mappedBy = "senderId",cascade = CascadeType.ALL)
-    private List<messages> messagesSender;
+    @OneToMany(mappedBy = "userSender",cascade = CascadeType.ALL)
+    private List<Message> messagesSender;
 
-    @OneToMany(mappedBy = "receiverId",cascade = CascadeType.ALL)
-    private List<messages> messagesReceiver;
+    @OneToMany(mappedBy = "userReceiver",cascade = CascadeType.ALL)
+    private List<Message> messagesReceiver;
 }
