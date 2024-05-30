@@ -1,37 +1,36 @@
 package com.riwi.Simulacro_Spring_Boot.domain.entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "lessons")
+@Entity (name = "enrollments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class lessons {
+public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String description;
+    private LocalDateTime date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "courses_id", referencedColumnName = "id")
-    private courses lessons;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id_enrollments", referencedColumnName = "id")
+    private List<User> courseEnrollsments;
 
-    @OneToMany(mappedBy = "assigments",cascade = CascadeType.REFRESH)
-    private List<assignments> assigments;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "courses_id_enrollments")
+    private List<Course> courses_id;
 }

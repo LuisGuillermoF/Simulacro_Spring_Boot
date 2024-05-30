@@ -17,13 +17,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity(name = "assignments")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class assignments {
+public class Assignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,8 +35,10 @@ public class assignments {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lessons_id",referencedColumnName = "id")
-    private assignments assigments;
+    private Lesson assigments;
+    
+    @ToString.Exclude
 
-    @OneToMany(mappedBy = "assignments",cascade = CascadeType.REFRESH)
-    private List<submissions> submissions;
+    @OneToMany(mappedBy = "submissions",cascade = CascadeType.REFRESH)
+    private List<Submission> submissions;
 }

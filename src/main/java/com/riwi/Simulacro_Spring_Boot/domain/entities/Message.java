@@ -3,6 +3,8 @@ package com.riwi.Simulacro_Spring_Boot.domain.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -10,34 +12,35 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-<<<<<<< HEAD
-=======
 import lombok.Data;
->>>>>>> 11de2d605e2d6e23f6adec9e3775175639d567ca
 import lombok.NoArgsConstructor;
 
-@Entity (name = "enrollments")
+@Entity (name = "messages")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class enrollments {
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String content;
     private LocalDateTime date;
 
-<<<<<<< HEAD
-    
-=======
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id_enrollments", referencedColumnName = "id")
-    private List<user> courseEnrollsments;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "courses_id_enrollments")
-    private List<courses> courses_id;
->>>>>>> 11de2d605e2d6e23f6adec9e3775175639d567ca
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_Sender",referencedColumnName = "id")
+    private User userSender;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_Receiver",referencedColumnName = "id")
+    private User userReceiver;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "coursesId",referencedColumnName = "id")
+    private Course courses;
 }
