@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity(name = "assignments")
 @AllArgsConstructor
@@ -34,7 +35,9 @@ public class Assignment {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lessons_id",referencedColumnName = "id")
-    private Assignment assigments;
+    private Lesson assigments;
+    
+    @ToString.Exclude
 
     @OneToMany(mappedBy = "submissions",cascade = CascadeType.REFRESH)
     private List<Submission> submissions;

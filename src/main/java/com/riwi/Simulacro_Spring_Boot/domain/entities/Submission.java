@@ -33,5 +33,5 @@ public class Submission {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assignments_id",referencedColumnName = "id")
-    private Assignment assignments;
+    private Assignment submissions;
 }

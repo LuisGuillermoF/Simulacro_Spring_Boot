@@ -2,7 +2,7 @@ package com.riwi.Simulacro_Spring_Boot.domain.entities;
 
 import java.util.List;
 
-import com.riwi.Simulacro_Spring_Boot.util.role;
+import com.riwi.Simulacro_Spring_Boot.util.Role;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,13 +12,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity (name = "user")
 @Data
@@ -38,21 +38,26 @@ public class User {
     @Column(length = 50, nullable = false)
     private String fullName;
     @Enumerated(EnumType.STRING)
-    private role role;
+    private Role role;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "user",
     cascade = CascadeType.ALL,orphanRemoval = false)
     private List<Course> courses;
+    @ToString.Exclude
 
     @OneToMany(mappedBy = "courseEnrollsments",cascade = CascadeType.ALL)
     private List<Enrollment> enrollments;
+    @ToString.Exclude
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Submission> submissions;
 
+    @ToString.Exclude
 
     @OneToMany(mappedBy = "userSender",cascade = CascadeType.ALL)
     private List<Message> messagesSender;
+    @ToString.Exclude
 
     @OneToMany(mappedBy = "userReceiver",cascade = CascadeType.ALL)
     private List<Message> messagesReceiver;
