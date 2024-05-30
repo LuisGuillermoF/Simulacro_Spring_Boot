@@ -37,4 +37,7 @@ public class courses {
 
     @OneToMany(mappedBy = "lessons",fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
     private List<lessons> lessons;
+
+    @OneToMany(mappedBy = "courses",fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
+    private List<messages> messages;
 }

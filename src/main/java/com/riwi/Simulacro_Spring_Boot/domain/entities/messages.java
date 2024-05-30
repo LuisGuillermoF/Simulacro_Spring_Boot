@@ -39,4 +39,8 @@ public class messages {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_Receiver",referencedColumnName = "id")
     private user userReceriver;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "coursesId",referencedColumnName = "id")
+    private courses courses;
 }
