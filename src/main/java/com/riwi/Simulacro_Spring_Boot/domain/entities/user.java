@@ -2,7 +2,9 @@ package com.riwi.Simulacro_Spring_Boot.domain.entities;
 
 import com.riwi.Simulacro_Spring_Boot.util.role;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +28,7 @@ public class user {
     private role role;
 
     @OneToMany(
-        mappedBy="coursesId",
+        mappedBy="userId",
         cascade = CascadeType.ALL,
         orphanRemoval = false, 
         fetch = FetchType.EAGER
